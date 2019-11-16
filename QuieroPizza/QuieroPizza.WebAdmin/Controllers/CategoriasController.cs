@@ -19,7 +19,9 @@ namespace QuieroPizza.WebAdmin.Controllers
         // GET: Categorias
         public ActionResult Index()
         {
-            return View();
+            var listadeCategorias = _categoriasBL.ObtenerCategorias();
+
+            return View(listadeCategorias);
         }
 
         [HttpGet] // Está implicíto
@@ -33,9 +35,21 @@ namespace QuieroPizza.WebAdmin.Controllers
         [HttpPost]
         public ActionResult Crear(Categoria categoria)
         {
-            _categoriasBL.GuardarCategoria(categoria);
+            if (ModelState.IsValid)
+            {
+                if (categoria.Descripcion != categoria.Descripcion.Trim())
+                {
+                    ModelState.AddModelError("Descripcion", "La descripción no debeb contener espacios al principio/final");
 
-            return RedirectToAction("Index");
+                    return View(categoria);
+                }
+
+                _categoriasBL.GuardarCategoria(categoria);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(categoria);
         }
 
         public ActionResult Editar(int id)
@@ -48,9 +62,21 @@ namespace QuieroPizza.WebAdmin.Controllers
         [HttpPost]
         public ActionResult Editar(Categoria categoria)
         {
-            _categoriasBL.GuardarCategoria(categoria);
+            if (ModelState.IsValid)
+            {
+                if (categoria.Descripcion != categoria.Descripcion.Trim())
+                {
+                    ModelState.AddModelError("Descripcion", "La descripción no debeb contener espacios al principio/final");
 
-            return RedirectToAction("Index");
+                    return View(categoria);
+                }
+
+                _categoriasBL.GuardarCategoria(categoria);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(categoria);
         }
 
         public ActionResult Detalle(int id)
