@@ -17,6 +17,7 @@ namespace QuieroPizza.WebAdmin.Controllers
             _productosBL = new ProductosBL();
             _categoriasBL = new CategoriasBL();
         }
+
         // GET: Productos
         public ActionResult Index()
         {
