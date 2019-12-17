@@ -66,7 +66,7 @@ namespace QuieroPizza.WebAdmin.Controllers
             {
                 if (categoria.Descripcion != categoria.Descripcion.Trim())
                 {
-                    ModelState.AddModelError("Descripcion", "La descripción no debeb contener espacios al principio/final");
+                    ModelState.AddModelError("Descripcion", "La descripción no debe contener espacios al principio/final");
 
                     return View(categoria);
                 }
